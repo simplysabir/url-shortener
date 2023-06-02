@@ -15,6 +15,14 @@ const handleGenerateNewShortUrl = async (req,res) => {
     return res.json({id : shortId});
 }
 
+const handleGetAnalytics = async (req,res)=>{
+    const shortId = req.params.shortId;
+    const result = await URL.findOne({shortId});
+    return res.json({totalClicks : result.visitHistory.length, analytics : result.visitHistory});
+
+}
+
 module.exports = {
     handleGenerateNewShortUrl,
+    handleGetAnalytics,
 }
